@@ -1,0 +1,30 @@
+{
+  "use_case_id": "return_policy",
+  "version": 1,
+  "enabled": true,
+  "description": "Explain the store's return and exchange policy: eligibility window, item condition requirements, non-returnable items, and how to start a return.",
+  "example_utterances": [
+    "What is your return policy?",
+    "Can I return this item?",
+    "How many days do I have to return an order?",
+    "Do I have to pay for return shipping?",
+    "Can I exchange instead of return?",
+    "Is this item eligible for return?"
+  ],
+  "prompt": "You are a policy specialist for an online store. Explain the return and exchange policy using ONLY the KB SNIPPETS (returns/refund and cancellation policy). Cover, where relevant: the return window, the required item condition, any non-returnable categories, whether return shipping is free, and the steps to start a return. Quote the policy faithfully — never invent timeframes, fees, or exceptions that are not in the KB. If the customer's specific situation isn't covered by the policy text, say so and offer to escalate rather than guessing. Set resolved=true when the KB lets you answer the policy question.",
+  "capabilities": {
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "return_policy.md", "description": "Return & exchange policy: 30-day window, condition requirements, non-returnables, return shipping, how to start a return." },
+      { "library_name": "Shared Support KB", "knowledge_file": "refund_policy.md", "description": "Refund eligibility: 30-day window, duplicate charges, non-refundable items, processing time." },
+      { "library_name": "Shared Support KB", "knowledge_file": "cancellation_policy.md", "description": "Cancellation: how to cancel, when it takes effect, refunds on cancellation, reactivation." }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "explained": "Here's how returns work: {{summary}}",
+    "not_covered": "Our standard policy doesn't cover this exact case, so I'll pass it to our Policy & Compliance team to confirm."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "use_case_id": "order_tracking",
+  "version": 1,
+  "enabled": true,
+  "description": "Tell the customer the current status, carrier, tracking number, and delivery ETA of their order(s).",
+  "example_utterances": [
+    "Where is my order?",
+    "What's the status of ORD-1001?",
+    "When will my package arrive?",
+    "Has my order shipped yet?",
+    "Track my delivery",
+    "Why hasn't my order arrived?"
+  ],
+  "prompt": "You are an order-tracking specialist for an online store. Use ONLY the GATHERED DATA from orderLookup to report each order's status, carrier, tracking number, and delivery ETA. If an order is 'delayed', acknowledge it plainly, give the revised ETA from the data, and reference the shipping/delivery KB for what happens next — never promise a date that is not in the data. If orderLookup returns found=false or an empty list, do NOT invent an order; ask the customer to confirm the order ID or the email used at checkout. Set resolved=true when you can report a concrete status from the data; set resolved=false only when no order data is available at all.",
+  "capabilities": {
+    "tools": ["orderLookup"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "shipping_delivery.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {
+    "customerId": {
+      "type": "string",
+      "description": "The customer's account id",
+      "prompt_if_missing": "Could you share your customer ID (or the email used at checkout) so I can pull up your order?"
+    }
+  },
+  "optional_params": {
+    "orderId": {
+      "type": "string",
+      "description": "The specific order number, e.g. ORD-1001, if the customer mentions one."
+    }
+  },
+  "side_effecting": false,
+  "response_templates": {
+    "in_transit": "Your order {{orderId}} is {{status}} with {{carrier}} (tracking {{tracking}}), expected by {{eta}}.",
+    "delayed": "Your order {{orderId}} is delayed. The revised delivery estimate is {{eta}}. Here's what we're doing about it: {{detail}}",
+    "not_found": "I couldn't find an order under those details. Could you double-check the order number or the email used at checkout?"
+  }
+}

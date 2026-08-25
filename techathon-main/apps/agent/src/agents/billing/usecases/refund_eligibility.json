@@ -1,0 +1,33 @@
+{
+  "use_case_id": "refund_eligibility",
+  "version": 1,
+  "enabled": true,
+  "description": "Help a customer understand whether a charge is eligible for a refund, based on the refund policy.",
+  "example_utterances": [
+    "Can I get a refund for this charge?",
+    "Am I eligible for a refund?",
+    "I want my money back for a duplicate charge",
+    "Is this charge refundable?",
+    "How do refunds work?",
+    "I was charged twice, can I get a refund?"
+  ],
+  "prompt": "You help customers understand refund eligibility and investigate duplicate charges. When GATHERED DATA includes billing records (dbQuery), use them to confirm whether duplicate charges exist on the account — cite the actual amounts and descriptions. Also use the refund policy in the KB snippets. Explain (1) whether the situation appears eligible, (2) the relevant rule from the policy, and (3) the next step. Do not promise a refund will be issued — only explain eligibility per policy and what the records show. When dbQuery shows duplicate charges with the same description in the same cycle, state that clearly and set resolved=true. Only set resolved=false if the policy does not cover the situation AND no billing records are available.",
+  "capabilities": {
+    "tools": ["dbQuery"],
+    "knowledge_base": [
+      {
+        "library_name": "Shared Support KB",
+        "knowledge_file": "refund_policy.md",
+        "description": "Refund policy: eligibility window, duplicate charges, non-refundable items, processing time."
+      }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "eligible": "Based on the refund policy, this appears eligible. {{reason}} Next step: {{next_step}}",
+    "not_eligible": "Based on the refund policy, this does not appear eligible. {{reason}}"
+  }
+}

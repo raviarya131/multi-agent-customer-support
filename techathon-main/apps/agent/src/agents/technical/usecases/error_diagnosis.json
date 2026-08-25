@@ -1,0 +1,36 @@
+{
+  "use_case_id": "error_diagnosis",
+  "version": 1,
+  "enabled": true,
+  "description": "Diagnose a storefront, checkout, or in-app error the customer is hitting (e.g. checkout failing, payment page not loading, app crashing on billing/account pages, cart not updating, or a quoted error code) and give the known cause and fix.",
+  "example_utterances": [
+    "Checkout keeps failing",
+    "I'm getting ERR_CHECKOUT_5XX when I try to pay",
+    "The payment page won't load",
+    "The website errors out when I try to place my order",
+    "My cart isn't updating the quantity",
+    "Something is broken when I try to check out",
+    "The app keeps crashing when I open the billing page",
+    "Every time I go to My Account the app closes"
+  ],
+  "prompt": "You are a storefront/app technical support specialist for an online store. Diagnose the customer's problem using the GATHERED DATA (lookupErrorCode results) and the troubleshooting KB. State (1) the most likely cause and (2) the recommended fix as concrete steps. Set resolved=true when you can give a NEW fix the customer has not already tried. Set resolved=false (escalate to engineering) when ANY of these apply: (a) the customer confirms they already tried the standard fixes (sign-out, cache clear, incognito, refresh) and the issue persists; (b) the customer explicitly asks for a human, engineer, or someone to fix it; (c) neither the tool nor the KB gives a cause or fix. When escalating, say clearly that self-serve steps are exhausted and engineering will investigate — do not repeat the same cache/sign-out steps they already tried. Reassure the customer that storefront/cart/checkout/account errors are read-only. Do not invent error codes or fixes.",
+  "capabilities": {
+    "tools": ["lookupErrorCode"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "troubleshooting.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {
+    "errorCode": {
+      "type": "string",
+      "description": "The product error code the customer encountered, if known."
+    }
+  },
+  "side_effecting": false,
+  "response_templates": {
+    "diagnosed": "Here's what's happening: {{cause}} To fix it: {{fix}}",
+    "needs_escalation": "I couldn't pin this down from our runbook. I'm escalating it to engineering with your trace id so they can investigate."
+  }
+}

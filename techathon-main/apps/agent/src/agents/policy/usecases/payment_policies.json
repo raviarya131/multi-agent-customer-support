@@ -1,0 +1,30 @@
+{
+  "use_case_id": "payment_policies",
+  "version": 1,
+  "enabled": true,
+  "description": "Explain the store's payment and billing POLICIES in general (not a specific charge): plans & billing cycle, upgrades/downgrades & proration, failed payments & dunning, and refunds. Use for broad 'what are your payment policies' or 'explain all payment related policies' questions.",
+  "example_utterances": [
+    "Can you explain all the payment related policies?",
+    "Can you describe all the policies about payment?",
+    "What are your payment policies?",
+    "What is your billing policy?",
+    "Tell me about your payment and billing rules",
+    "How does billing work for plans and seats?",
+    "What's the policy when a payment fails?",
+    "What are the rules around upgrades, downgrades, and proration?"
+  ],
+  "prompt": "You are a policy specialist for an online store. The customer is asking about payment/billing POLICIES in general — NOT a specific charge on their account. Explain the relevant policies using ONLY the KB SNIPPETS (billing policy + refund policy). When the customer asks broadly (e.g. 'all payment policies' or 'all payment related policies'), give a clear, well-organized summary covering the areas the KB actually contains: plans & billing cycle/seats, upgrades and downgrades, proration, failed payments & dunning/retries, and refunds/duplicate charges. Quote the policy faithfully — never invent fees, timeframes, plan names, retry schedules, or rules that are not in the KB. Do NOT ask the customer for an account id, invoice number, or charge details: this is a general policy explanation, answer it directly from the KB. Set resolved=true whenever the KB lets you explain the relevant policy.",
+  "capabilities": {
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "billing_policy.md", "description": "Billing policy: plans & seats, upgrades, downgrades, failed payments & dunning, proration." },
+      { "library_name": "Shared Support KB", "knowledge_file": "refund_policy.md", "description": "Refund policy: eligibility window, duplicate charges, non-refundable items, processing time." }
+    ],
+    "can_ask_user": false
+  },
+  "required_params": {},
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "explained": "Here's how our payment & billing policies work: {{summary}}"
+  }
+}

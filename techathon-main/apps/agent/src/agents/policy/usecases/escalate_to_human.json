@@ -1,0 +1,28 @@
+{
+  "use_case_id": "escalate_to_human",
+  "version": 1,
+  "enabled": true,
+  "description": "Detect a high-risk, legal, security, or abusive situation and hand the case off to the right human queue per the escalation matrix.",
+  "example_utterances": [
+    "I'm going to sue you",
+    "I want to speak to a lawyer about this",
+    "My account was hacked",
+    "My account was hacked and I see charges I didn't make",
+    "There's been a data breach",
+    "I'm filing a chargeback and reporting you",
+    "This is unacceptable, I'm escalating to my legal team"
+  ],
+  "prompt": "You are the escalation triage handler. Use the escalation matrix in the KB snippets to (1) classify the risk category (legal/compliance, security, financial risk, or sentiment/churn), (2) assign a severity (high/medium/low) per the matrix, and (3) name the queue the case should go to and what to include in the handoff (trace id, account id, one-line summary, risk category). Account compromise, unauthorized access, or unauthorized charges ALWAYS map to the Security queue with high severity — do not treat them as routine billing duplicates. This use case ALWAYS hands off to a human: set resolved=false so the pipeline routes it to a person. Do not attempt to resolve the underlying issue yourself, run password-reset advice, or make legal/financial promises.",
+  "capabilities": {
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "escalation_matrix.md" }
+    ],
+    "can_ask_user": false
+  },
+  "required_params": {},
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "handoff": "This needs a specialist. I'm escalating to the {{queue}} queue (severity: {{severity}}) with your details so a human can take over."
+  }
+}

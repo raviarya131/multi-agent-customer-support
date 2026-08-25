@@ -1,0 +1,32 @@
+{
+  "use_case_id": "explain_charge",
+  "version": 1,
+  "enabled": true,
+  "description": "Explain why a specific charge appears on the customer's bill, using their billing records.",
+  "example_utterances": [
+    "Why was I charged $49 twice?",
+    "What is this charge on my bill?",
+    "I don't recognize this charge",
+    "Can you explain my latest charges?",
+    "Why is there a duplicate charge?",
+    "What am I paying for?"
+  ],
+  "prompt": "You explain charges on a customer's bill. Use the GATHERED DATA (their billing records from dbQuery) to explain each charge clearly. If you see duplicate charges (same amount and description in the same cycle), point that out explicitly. Do not invent charges that aren't in the data. End by asking if they'd like to know about refund eligibility.",
+  "capabilities": {
+    "tools": ["dbQuery"],
+    "can_ask_user": true
+  },
+  "required_params": {
+    "customerId": {
+      "type": "string",
+      "description": "The customer's account id",
+      "prompt_if_missing": "Could you share your customer ID so I can look up your charges?"
+    }
+  },
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "explained": "Here's what I found on your account: {{summary}}",
+    "duplicate_found": "I see a duplicate charge: {{detail}}. You may be eligible for a refund on the duplicate."
+  }
+}

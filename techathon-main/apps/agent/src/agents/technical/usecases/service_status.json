@@ -1,0 +1,31 @@
+{
+  "use_case_id": "service_status",
+  "version": 1,
+  "enabled": true,
+  "description": "Tell a customer whether a product component or feature is currently operational, degraded, or down.",
+  "example_utterances": [
+    "Is the export feature down?",
+    "Is there an outage right now?",
+    "Why is the dashboard so slow?",
+    "Is the API working?",
+    "Are you having problems with the service?",
+    "Is everything operational?"
+  ],
+  "prompt": "You report live service status. Use the GATHERED DATA (serviceStatus) only — it gives the current status of the named component, or the whole status board if no component was named. State plainly whether the component is operational, degraded, or down, and since when if known. If degraded or down, acknowledge the impact and advise the customer to check back or subscribe to status updates. Reporting the current status counts as resolving (resolved=true). Do not speculate about causes beyond the data.",
+  "capabilities": {
+    "tools": ["serviceStatus"],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {
+    "component": {
+      "type": "string",
+      "description": "The product component to check (e.g. export, api, dashboard, billing)."
+    }
+  },
+  "side_effecting": false,
+  "response_templates": {
+    "operational": "{{component}} is operational right now.",
+    "degraded": "{{component}} is currently degraded (since {{since}}). We're working on it — please check back shortly."
+  }
+}

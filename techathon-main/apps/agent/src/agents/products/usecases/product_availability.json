@@ -1,0 +1,39 @@
+{
+  "use_case_id": "product_availability",
+  "version": 1,
+  "enabled": true,
+  "description": "Tell the customer whether a product is in stock, its price, available variants, and restock ETA if out of stock.",
+  "example_utterances": [
+    "Is the Wireless Earbuds Pro in stock?",
+    "Do you have running shoes in UK 9?",
+    "How much does the mechanical keyboard cost?",
+    "When will the running shoes be back in stock?",
+    "What colors does the t-shirt come in?",
+    "Is this available right now?"
+  ],
+  "prompt": "You are a product-availability specialist for an online store. Use ONLY the GATHERED DATA from productLookup to state whether the item is in stock, its price (with currency), and the available variants (sizes/colors). If a product is out of stock, give the restock ETA from the data and offer to note interest — never invent stock, prices, or dates. If the customer asks for a variant not listed in the data, say it isn't available rather than guessing. If productLookup returns no match, tell the customer we don't currently carry that item in our catalog and ask them to confirm the exact product name or share a product link/SKU — do NOT mention tickets, internal tools, or catalog access limits. Set resolved=true when you can report availability (including a clear not-in-catalog answer) from the data.",
+  "capabilities": {
+    "tools": ["productLookup"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "product_catalog.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {
+    "query": {
+      "type": "string",
+      "description": "The product name or keywords the customer is asking about."
+    },
+    "productId": {
+      "type": "string",
+      "description": "The catalog SKU if the customer provides one, e.g. SKU-SHOES."
+    }
+  },
+  "side_effecting": false,
+  "response_templates": {
+    "in_stock": "Yes — {{name}} is in stock at {{price}}. Available options: {{variants}}.",
+    "out_of_stock": "{{name}} is currently out of stock. We expect it back around {{restockEta}}; I can note your interest if you'd like.",
+    "not_found": "I couldn't find that item in our catalog. Could you confirm the exact product name?"
+  }
+}

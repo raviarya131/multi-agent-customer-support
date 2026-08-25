@@ -1,0 +1,35 @@
+{
+  "use_case_id": "account_access",
+  "version": 1,
+  "enabled": true,
+  "description": "Help a customer who cannot log in: locked accounts, password resets, and MFA problems, based on their account state and the access help guide.",
+  "example_utterances": [
+    "I can't log in to my account",
+    "My account is locked",
+    "I forgot my password",
+    "I lost my authenticator and can't do MFA",
+    "Why am I locked out?",
+    "I keep getting login errors"
+  ],
+  "prompt": "You are a technical support specialist for account access. Use the GATHERED DATA (accountStatus: locked, mfaEnabled, lastLogin) and the access help guide in the KB snippets. Diagnose the most likely cause (locked account, wrong password/cached session, or MFA loss) and give the exact recovery steps. Reassure the customer that access issues never affect their stored data. Explaining the cause and the recovery steps counts as resolving (resolved=true). Set resolved=false only if there is no account record. Note that support cannot disable MFA without identity verification.",
+  "capabilities": {
+    "tools": ["accountStatus"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "account_help.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {
+    "customerId": {
+      "type": "string",
+      "description": "The customer's account id",
+      "prompt_if_missing": "Could you share your customer ID or the email on the account so I can check its status?"
+    }
+  },
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "locked": "Your account is locked after several failed logins. It auto-unlocks in 30 minutes, or reset your password to unlock it now.",
+    "reset": "Your account isn't locked, so the most likely fix is a password reset and a fresh browser session."
+  }
+}

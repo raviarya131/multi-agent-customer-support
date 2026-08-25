@@ -1,0 +1,40 @@
+{
+  "use_case_id": "cancel_change_order",
+  "version": 1,
+  "enabled": true,
+  "description": "Help a customer cancel an order or change it (item, quantity, or shipping address) within the allowed window.",
+  "example_utterances": [
+    "I want to cancel my order",
+    "Can I change the shipping address on ORD-1003?",
+    "Please cancel ORD-1001",
+    "I ordered the wrong size, can I change it?",
+    "Stop my order before it ships",
+    "Can I add an item to my existing order?"
+  ],
+  "prompt": "You handle order cancellations and changes for an online store. Use ONLY the GATHERED DATA from orderLookup and the cancellation-policy KB. Determine eligibility from the order's status and the 'cancellable' flag in the data: orders that are 'processing' (not yet shipped) can usually be cancelled or changed; once 'shipped'/'out_for_delivery'/'delivered' they cannot be cancelled and must follow the returns flow instead. Never claim an order was cancelled or changed yourself — clearly state whether the change is eligible and the exact next step. If the customer is eligible and confirms, say the request will be submitted to Order Operations. If the order cannot be found, ask for the order ID instead of guessing. Set resolved=true when you can give a clear eligibility decision and next step.",
+  "capabilities": {
+    "tools": ["orderLookup"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "cancellation_policy.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {
+    "customerId": {
+      "type": "string",
+      "description": "The customer's account id",
+      "prompt_if_missing": "Could you share your customer ID so I can locate the order you'd like to change?"
+    }
+  },
+  "optional_params": {
+    "orderId": {
+      "type": "string",
+      "description": "The order number to cancel or change, e.g. ORD-1003."
+    }
+  },
+  "side_effecting": true,
+  "response_templates": {
+    "eligible": "Order {{orderId}} is still {{status}}, so the {{changeType}} can be made. I'll submit this to our Order Operations team to action.",
+    "too_late": "Order {{orderId}} has already {{status}}, so it can't be cancelled now. You can use our returns process once it arrives — here are the details: {{detail}}"
+  }
+}

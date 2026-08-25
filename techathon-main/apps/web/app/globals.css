@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Claude theme (tweakcn preset). Tokens are stored as bare oklch components
+   so Tailwind's `<alpha-value>` placeholder can inject opacity, e.g.
+   `oklch(var(--primary) / <alpha-value>)`. The app defaults to dark mode.
+--------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    --background: 0.9818 0.0054 95.0986;
+    --foreground: 0.3438 0.0269 95.7226;
+    --card: 0.9818 0.0054 95.0986;
+    --card-foreground: 0.1908 0.0020 106.5859;
+    --popover: 1 0 0;
+    --popover-foreground: 0.2671 0.0196 98.9390;
+    --primary: 0.6171 0.1375 39.0427;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.9245 0.0138 92.9892;
+    --secondary-foreground: 0.4334 0.0177 98.6048;
+    --muted: 0.9341 0.0153 90.2390;
+    --muted-foreground: 0.6059 0.0075 97.4233;
+    --accent: 0.9245 0.0138 92.9892;
+    --accent-foreground: 0.2671 0.0196 98.9390;
+    --destructive: 0.1908 0.0020 106.5859;
+    --destructive-foreground: 1 0 0;
+    --border: 0.8847 0.0069 97.3627;
+    --input: 0.7621 0.0156 98.3528;
+    --ring: 0.6171 0.1375 39.0427;
+    --chart-1: 0.5583 0.1276 42.9956;
+    --chart-2: 0.6898 0.1581 290.4107;
+    --chart-3: 0.8816 0.0276 93.1280;
+    --chart-4: 0.8822 0.0403 298.1792;
+    --chart-5: 0.5608 0.1348 42.0584;
+    --sidebar: 0.9663 0.0080 98.8792;
+    --sidebar-foreground: 0.3590 0.0051 106.6524;
+    --sidebar-primary: 0.6171 0.1375 39.0427;
+    --sidebar-primary-foreground: 0.9881 0 0;
+    --sidebar-accent: 0.9245 0.0138 92.9892;
+    --sidebar-accent-foreground: 0.3250 0 0;
+    --sidebar-border: 0.9401 0 0;
+    --sidebar-ring: 0.7731 0 0;
+
+    --radius: 0.5rem;
+    --tracking-normal: 0em;
+
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  }
+
+  .dark {
+    /* Deep warm charcoal base with a clear elevation ladder:
+       background (page) → card/muted (panels) → secondary/accent (chips, hover). */
+    --background: 0.1820 0.0030 106.6427;
+    --foreground: 0.8650 0.0130 93.0137;
+    --card: 0.2180 0.0033 106.6427;
+    --card-foreground: 0.9180 0.0050 95.0986;
+    --popover: 0.2300 0.0033 106.6039;
+    --popover-foreground: 0.9180 0.0040 106.4781;
+    --primary: 0.6724 0.1308 38.7559;
+    --primary-foreground: 1 0 0;
+    /* Preset secondary is near-white (an inverted token); this app uses
+       bg-secondary for subtle dark surfaces, so we keep it a soft dark grey. */
+    --secondary: 0.2640 0.0036 106.6039;
+    --secondary-foreground: 0.8650 0.0130 93.0137;
+    --muted: 0.2120 0.0033 106.7070;
+    --muted-foreground: 0.6680 0.0120 99.0657;
+    --accent: 0.2560 0.0050 95.4245;
+    --accent-foreground: 0.9180 0.0080 98.8792;
+    --destructive: 0.6368 0.2078 25.3313;
+    --destructive-foreground: 1 0 0;
+    --border: 0.2880 0.0045 106.8928;
+    --input: 0.3260 0.0060 100.2195;
+    --ring: 0.6724 0.1308 38.7559;
+    --chart-1: 0.5583 0.1276 42.9956;
+    --chart-2: 0.6898 0.1581 290.4107;
+    --chart-3: 0.2130 0.0078 95.4245;
+    --chart-4: 0.3074 0.0516 289.3230;
+    --chart-5: 0.5608 0.1348 42.0584;
+    --sidebar: 0.1560 0.0028 106.6427;
+    --sidebar-foreground: 0.8650 0.0130 93.0137;
+    --sidebar-primary: 0.6724 0.1308 38.7559;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.2560 0.0050 95.4245;
+    --sidebar-accent-foreground: 0.9180 0.0080 98.8792;
+    --sidebar-border: 0.2880 0.0045 106.8928;
+    --sidebar-ring: 0.6724 0.1308 38.7559;
+  }
+}
+
+@layer components {
+  /* Shared form control used across the platform admin console. */
+  .input {
+    @apply w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-colors focus:border-ring/60 focus:ring-2 focus:ring-ring/20;
+  }
+
+  /* Skeleton shimmer — a moving highlight over a muted base. */
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-muted/60;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(var(--foreground) / 0.06),
+      transparent
+    );
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  /* Minimal, professional motion primitives. */
+  @keyframes skeleton-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes thought-in {
+    from {
+      opacity: 0;
+      transform: translateX(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  /* Soft entrance for chat bubbles / cards. */
+  .animate-rise {
+    animation: rise-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Each streamed "thought" line slides in. */
+  .animate-thought {
+    animation: thought-in 0.25s ease-out both;
+  }
+  /* Blinking caret shown while the assistant reply is still streaming in.
+     A slim cursor line feels closer to real token streaming (Anthropic-style). */
+  .stream-caret::after {
+    content: "";
+    display: inline-block;
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    width: 2px;
+    height: 1em;
+    border-radius: 1px;
+    background-color: oklch(var(--primary) / 0.8);
+    animation: caret-blink 0.85s ease-in-out infinite;
+  }
+  @keyframes caret-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  /* Auth background: large blurred orbs that drift slowly. Each orb sets its
+     own --dx/--dy/--dur so they wander independently. */
+  @keyframes orb-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(var(--dx, 40px), var(--dy, -30px)) scale(1.12); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  .animate-orb {
+    animation: orb-drift var(--dur, 24s) ease-in-out infinite;
+    will-change: transform;
+  }
+  /* Mesh-gradient blobs: large color fields that roam + scale so their overlap
+     reads as one slowly-morphing gradient. */
+  @keyframes mesh-a {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(18vw, 12vh) scale(1.25); }
+    66%  { transform: translate(-12vw, 20vh) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  @keyframes mesh-b {
+    0%   { transform: translate(0, 0) scale(1.1); }
+    33%  { transform: translate(-20vw, -10vh) scale(0.85); }
+    66%  { transform: translate(14vw, -16vh) scale(1.2); }
+    100% { transform: translate(0, 0) scale(1.1); }
+  }
+  @keyframes mesh-c {
+    0%   { transform: translate(0, 0) scale(0.95); }
+    50%  { transform: translate(16vw, -14vh) scale(1.25); }
+    100% { transform: translate(0, 0) scale(0.95); }
+  }
+  @keyframes mesh-d {
+    0%   { transform: translate(0, 0) scale(1.15); }
+    50%  { transform: translate(-16vw, 14vh) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1.15); }
+  }
+  .animate-mesh-a { animation: mesh-a 26s ease-in-out infinite; will-change: transform; }
+  .animate-mesh-b { animation: mesh-b 32s ease-in-out infinite; will-change: transform; }
+  .animate-mesh-c { animation: mesh-c 38s ease-in-out infinite; will-change: transform; }
+  .animate-mesh-d { animation: mesh-d 44s ease-in-out infinite; will-change: transform; }
+  /* Aurora curtains: wide light bands sliding sideways (the parent is rotated so
+     the motion reads as gentle diagonal flow). */
+  @keyframes aurora-x {
+    0%   { transform: translateX(-22%); opacity: 0.85; }
+    50%  { transform: translateX(22%);  opacity: 1; }
+    100% { transform: translateX(-22%); opacity: 0.85; }
+  }
+  .animate-aurora { animation: aurora-x var(--dur, 30s) ease-in-out infinite; will-change: transform, opacity; }
+  /* Spotlight that roams across the page, gently lighting the grid beneath it. */
+  @keyframes spotlight-move {
+    0%   { transform: translate(-12vw, -12vh); }
+    25%  { transform: translate(58vw, 6vh); }
+    50%  { transform: translate(46vw, 56vh); }
+    75%  { transform: translate(-4vw, 42vh); }
+    100% { transform: translate(-12vw, -12vh); }
+  }
+  .animate-spotlight { animation: spotlight-move 26s ease-in-out infinite; will-change: transform; }
+  /* Whole-canvas gradient that slowly pans through the theme hues. */
+  @keyframes gradient-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animate-gradient {
+    background-size: 300% 300%;
+    animation: gradient-shift var(--dur, 22s) ease infinite;
+    will-change: background-position;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-rise,
+    .animate-thought,
+    .animate-orb,
+    .animate-mesh-a,
+    .animate-mesh-b,
+    .animate-mesh-c,
+    .animate-mesh-d,
+    .animate-aurora,
+    .animate-spotlight,
+    .animate-gradient,
+    .skeleton::after,
+    .stream-caret::after {
+      animation: none;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    letter-spacing: var(--tracking-normal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Slim, theme-aware scrollbars for the panes. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 9999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--muted-foreground) / 0.5);
+  }
+}

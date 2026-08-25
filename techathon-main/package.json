@@ -1,0 +1,20 @@
+{
+  "name": "support-engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-Agent Customer Support Resolution Engine (base)",
+  "workspaces": [
+    "apps/agent",
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:agent": "npm --workspace apps/agent run dev",
+    "dev:api": "npm --workspace apps/api run dev",
+    "dev:web": "npm --workspace apps/web run dev",
+    "dev:all": "concurrently -n agent,api,web -c magenta,green,yellow \"npm:dev:agent\" \"npm:dev:api\" \"npm:dev:web\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "use_case_id": "cancellation_policy",
+  "version": 1,
+  "enabled": true,
+  "description": "Explain how cancellation works: how to cancel, when it takes effect, notice periods, refunds on cancellation, and reactivation.",
+  "example_utterances": [
+    "How do I cancel my subscription?",
+    "What happens when I cancel?",
+    "Is there a notice period to cancel?",
+    "Will I get a refund if I cancel?",
+    "Can I reactivate after cancelling?",
+    "What's your cancellation policy?"
+  ],
+  "prompt": "You explain the cancellation policy using the KB snippets. Cover the points relevant to the customer's question: how to cancel, when cancellation takes effect (end of the current cycle), any notice period (annual plans need 30 days), whether a refund applies (cancelling alone does not refund the current cycle), and reactivation/data retention. Explaining the applicable policy counts as resolving (resolved=true). Set resolved=false only if the policy does not cover the question. Do not invent terms.",
+  "capabilities": {
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "cancellation_policy.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {},
+  "side_effecting": false
+}

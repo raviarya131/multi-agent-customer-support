@@ -1,0 +1,32 @@
+# ============================================================================
+# SupportEmgine — prerequisites checklist
+# This is a Node.js monorepo (not Python). Install JS packages with:
+#   npm install
+# Use this file as a quick checklist of what you need before running the app.
+# ============================================================================
+
+# --- Runtime ---
+# Node.js >= 18 (LTS recommended, e.g. 20.x or 22.x)
+# npm >= 9  (ships with Node)
+
+# --- Required for AI features ---
+# Groq API key from https://console.groq.com/keys
+# Set in .env as:
+#   GROQ_API_KEY=your_key_here
+#   GROQ_MODEL=llama-3.3-70b-versatile
+#   LLM_PROVIDER=groq
+#
+# Without a key the app still runs using offline heuristic fallbacks.
+
+# --- Optional tools ---
+# Git (to clone the repo)
+# A modern browser (Chrome / Edge / Firefox)
+
+# --- Ports used locally (must be free) ---
+# 3100  Frontend (Next.js)
+# 4100  API (Express + SQLite)
+# 5000  Agent system (LangGraph pipeline)
+
+# --- JS dependency lockfile ---
+# See package.json and package-lock.json at this directory.
+# Do NOT use pip install -r requirements.txt

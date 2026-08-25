@@ -1,0 +1,35 @@
+{
+  "use_case_id": "failed_payment",
+  "version": 1,
+  "enabled": true,
+  "description": "Diagnose why a customer's payment failed or their account is past due, and give recovery steps based on the billing/dunning policy.",
+  "example_utterances": [
+    "My payment failed",
+    "Why was my card declined?",
+    "My account says past due",
+    "I got an email saying my payment didn't go through",
+    "Why can't you charge my card?",
+    "My subscription was suspended for non-payment"
+  ],
+  "prompt": "You help customers recover from a failed payment. Use the GATHERED DATA (paymentStatus) for the last payment and decline reason, and the billing policy in the KB snippets for the dunning/retry rules. Explain (1) the status of their last payment and the decline reason if any, (2) the retry schedule and what happens if it keeps failing, and (3) the concrete fix (usually update the payment method). Explaining the cause and fix counts as resolving (resolved=true). Set resolved=false only if there is no payment record and you cannot help. Do not invent card numbers or amounts.",
+  "capabilities": {
+    "tools": ["paymentStatus"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "billing_policy.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {
+    "customerId": {
+      "type": "string",
+      "description": "The customer's account id",
+      "prompt_if_missing": "Could you share your customer ID so I can check your latest payment?"
+    }
+  },
+  "optional_params": {},
+  "side_effecting": false,
+  "response_templates": {
+    "declined": "Your last payment of {{amount}} was declined ({{reason}}). Please update your payment method; we'll retry automatically.",
+    "succeeded": "Your last payment of {{amount}} went through successfully, so your account is in good standing."
+  }
+}

@@ -1,0 +1,74 @@
+# ============================================================================
+# Support Resolution Engine — environment
+# Copy this file to `.env` at the repo root:  cp .env.example .env
+# Every workspace (agent / api) walks up the tree and loads this one root .env.
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# LLM — company OpenAI-compatible endpoint (the common case here)
+# Exactly THREE values, mirroring your curl:
+#   curl 'https://openaiqc.gep.com/summerintern/openai/v1/chat/completions'
+#     -H 'Authorization: Bearer <LLM_API_KEY>'
+#     -d '{ "model": "<LLM_MODEL>", "messages": [...] }'
+#   1) LLM_ENDPOINT  base URL ENDING AT /v1 (the SDK adds /chat/completions)
+#   2) LLM_MODEL     the model name sent in the body
+#   3) LLM_API_KEY   the bearer token
+# When LLM_ENDPOINT is set the engine uses this endpoint automatically.
+# ----------------------------------------------------------------------------
+LLM_ENDPOINT=https://openaiqc.gep.com/summerintern/openai/v1
+LLM_MODEL=gpt-5.2
+LLM_API_KEY=5oikR8cs8TMaYNUboX0HSmls9O3Cu0Pe8UUYvUc5qCHUcotPwAqSJQQJ99CFACYeBjFXJ3w3AAAAACOGMhNu
+
+# Force a specific provider (custom|azure|openai|anthropic|groq|gemini).
+# Leave unset to auto-pick the custom endpoint when LLM_ENDPOINT is set.
+# LLM_PROVIDER=custom
+
+# ----------------------------------------------------------------------------
+# LLM — alternatives (all optional). The system also runs WITHOUT any key:
+# classifier, agents and synthesis fall back to deterministic heuristics.
+# ----------------------------------------------------------------------------
+# Standard OpenAI / other compatible providers:
+# OPENAI_API_KEY=
+# OPENAI_MODEL=gpt-4o-mini
+# OPENAI_BASE_URL=
+# ANTHROPIC_API_KEY=
+# GROQ_API_KEY=
+# GEMINI_API_KEY=
+#
+# Native Azure OpenAI (only for a real Azure resource URL with /deployments/):
+# AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
+# AZURE_OPENAI_DEPLOYMENT=gpt-4o
+# AZURE_OPENAI_API_KEY=your-bearer-token
+# AZURE_OPENAI_API_VERSION=2024-08-01-preview
+
+# ----------------------------------------------------------------------------
+# Ports / service wiring
+# ----------------------------------------------------------------------------
+AGENT_PORT=5000
+API_PORT=4100
+AGENT_URL=http://localhost:5000
+# SQLite file for the Application API (relative to apps/api).
+API_DB_PATH=support.db
+
+# NOTE: the web app reads its API URL from apps/web/.env.local, not this file:
+#   NEXT_PUBLIC_API_URL=http://localhost:4100
+# (Next.js only exposes NEXT_PUBLIC_* vars and loads its own .env.local.)
+
+# ----------------------------------------------------------------------------
+# Routing thresholds (tune-able; sensible defaults baked in)
+# ----------------------------------------------------------------------------
+# Per-agent confidence gates (shared/config).
+DOMAIN_THRESHOLD=0.3
+CONFIDENCE_THRESHOLD=0.6
+# Top-level intent router (steps/classifier).
+CLASSIFIER_MULTI_THRESHOLD=0.6
+CLASSIFIER_FALLBACK_THRESHOLD=0.5
+# KB keyword retrieval: top sections kept per document.
+KB_TOP_SECTIONS=2
+
+# ----------------------------------------------------------------------------
+# Audit log — durable JSONL of every agent interaction. Set to `off` to disable
+# the file (console logging always stays on).
+# ----------------------------------------------------------------------------
+AUDIT_LOG=on
+AUDIT_LOG_FILE=logs/audit.jsonl

@@ -1,0 +1,38 @@
+{
+  "use_case_id": "product_info",
+  "version": 1,
+  "enabled": true,
+  "description": "Answer pre-purchase questions about a product's specifications, materials, warranty, sizing, and help the customer compare options.",
+  "example_utterances": [
+    "What are the specs of the mechanical keyboard?",
+    "Does the water bottle keep drinks cold?",
+    "What material is the t-shirt made of?",
+    "How long is the warranty on the earbuds?",
+    "Which keyboard switch should I pick?",
+    "Tell me more about the running shoes"
+  ],
+  "prompt": "You are a product specialist for an online store. Use ONLY the GATHERED DATA from productLookup (the 'specs' and 'variants' fields) and the catalog KB to answer specification, material, sizing, and warranty questions, and to help the customer compare listed options. Be accurate and concise; never invent specs, measurements, materials, or warranty terms that are not in the data. If a detail isn't in the data, say you don't have it and offer to connect them with the team. If no product matches, ask the customer to confirm the product name. Set resolved=true when you can answer from the data; do not give buying advice that goes beyond the listed facts.",
+  "capabilities": {
+    "tools": ["productLookup"],
+    "knowledge_base": [
+      { "library_name": "Shared Support KB", "knowledge_file": "product_catalog.md" }
+    ],
+    "can_ask_user": true
+  },
+  "required_params": {},
+  "optional_params": {
+    "query": {
+      "type": "string",
+      "description": "The product name or keywords the customer is asking about."
+    },
+    "productId": {
+      "type": "string",
+      "description": "The catalog SKU if the customer provides one."
+    }
+  },
+  "side_effecting": false,
+  "response_templates": {
+    "answered": "Here are the details on {{name}}: {{summary}}",
+    "not_found": "I couldn't find that product. Could you confirm its name so I can pull the specs?"
+  }
+}

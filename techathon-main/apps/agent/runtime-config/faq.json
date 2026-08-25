@@ -1,0 +1,106 @@
+[
+  {
+    "label": "Return policy",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "what is your return policy",
+      "can i return this item",
+      "how many days do i have to return",
+      "is this item eligible for return"
+    ],
+    "answer": "You can return most items within 30 days of delivery, as long as they're unused and in their original packaging. Some items (like final-sale or perishable goods) aren't returnable. To start a return, open the order in your account and choose \"Return item\".",
+    "id": "9e1fc977-a949-41b9-b22e-b34eb8f32a29"
+  },
+  {
+    "label": "Refund eligibility",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "can i get a refund",
+      "am i eligible for a refund",
+      "is this charge refundable",
+      "how do refunds work"
+    ],
+    "answer": "Refunds are available for eligible returns within the 30-day window and for confirmed duplicate charges. Once approved, refunds are issued to your original payment method and typically take 5-10 business days to appear.",
+    "id": "46e3cf75-4000-496d-8ff5-8ab273730974"
+  },
+  {
+    "label": "Order tracking",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "where is my order",
+      "track my delivery",
+      "when will my package arrive",
+      "has my order shipped yet"
+    ],
+    "answer": "You can track your order anytime from the order details page in your account, where you'll find the carrier, tracking number, and estimated delivery date. If your order is delayed, the revised ETA will show there too.",
+    "id": "0bc85a38-f91d-4f35-9017-b613955ec023"
+  },
+  {
+    "label": "Cancel or change an order",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "can i cancel my order",
+      "how do i cancel my order",
+      "i need to change my order",
+      "cancel my subscription"
+    ],
+    "answer": "Orders can be changed or cancelled while they're still being prepared. Open the order in your account and choose \"Cancel\" or \"Edit\". Once an order has shipped it can no longer be cancelled, but you can return it after delivery.",
+    "id": "e0597585-2a90-4090-9b3c-05bbf957bcce"
+  },
+  {
+    "label": "Product availability",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "is this in stock",
+      "when will this be back in stock",
+      "do you have this item available",
+      "is the item available"
+    ],
+    "answer": "Live stock is shown on each product page. If an item is out of stock, you can opt in to a back-in-stock notification from that page and we'll email you as soon as it returns.",
+    "id": "5bcb585f-1098-4d16-ac62-5a540f5b253d"
+  },
+  {
+    "label": "Payment failed",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "why did my payment fail",
+      "my payment was declined",
+      "my card was declined",
+      "i can't complete my payment"
+    ],
+    "answer": "Payments are usually declined due to an incorrect card detail, insufficient funds, or your bank flagging the transaction. Double-check your card number, expiry, and billing address, then try again or use a different payment method. If it keeps failing, contact your bank.",
+    "id": "07d5977d-3968-4007-952c-ec556385c491"
+  },
+  {
+    "label": "Account and login",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "i can't log in",
+      "i forgot my password",
+      "how do i reset my password",
+      "i'm locked out of my account"
+    ],
+    "answer": "If you can't sign in, use the \"Forgot password\" link on the login page to reset it via email. If your account is locked after several attempts, wait a few minutes and try again. Make sure you're using the same email you signed up with.",
+    "id": "0f549836-e2cd-4967-8b60-c91e52e73636"
+  },
+  {
+    "label": "Service status",
+    "enabled": true,
+    "match": "contains",
+    "triggers": [
+      "is the site down",
+      "is the website not working",
+      "are you having an outage",
+      "the app isn't working"
+    ],
+    "answer": "If pages aren't loading, try refreshing or clearing your browser cache first. Most issues are temporary. If the problem continues, let us know what you were doing and any error message you saw so we can investigate.",
+    "id": "ae9d03ae-4b90-4799-941a-44e35a22b368"
+  }
+]
